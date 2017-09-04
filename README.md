@@ -279,6 +279,8 @@ In this step, we will add a filter to our `ng-repeat`.
 
 </details>
 
+### Solution
+
 <details>
 
 <summary> <code> index.html </code> </summary>
