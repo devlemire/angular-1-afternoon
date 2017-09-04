@@ -151,7 +151,6 @@ In this step, we'll add mock friend data to scope in `js/friendCtrl.js` and the 
       * `city` - string
       * `state` - string
       * `country` - string
-      * `zip` - string
     * `status` - string || null
     * `friend_count` - number
   * Follow the format of hard-coded `li` element.
