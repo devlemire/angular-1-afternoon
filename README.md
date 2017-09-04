@@ -24,7 +24,9 @@ In this step, we'll create the skeleton of our Angular application.
 * Open `js/friendCtrl.js` and create a controller called `friendCtrl`.
   * Add a scope variable called test that equals `"Connected"`.
 * Open `index.html`.
-* Import the Angular CDN.
+* Add a `script` tag for the Angular CDN.
+* Add a `script` tag for `js/app.js`.
+* Add a `script` tag for `js/friendCtrl.js`.
 * Add `ng-app` and `ng-controller` to the HTML.
 * Verify your `app` and `controller` are connected by adding `{{ test }}` to the HTML.
   * If `Connected` appears on the DOM, remove `{{ test }}` from the HTML and `$scope.test` from `js/friendCtrl.js`.
