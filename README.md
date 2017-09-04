@@ -256,3 +256,119 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 ```
 
 </details>
+
+## Step 3
+
+### Summary
+
+In this step, we will add a filter to our `ng-repeat`.
+
+### Instructions
+
+* Open `js/friendCtrl.js`.
+* Add a new `scope` variable called `searchTerm` and default it to an empty string.
+* Open `index.html`.
+* Update the input with the class of `.form-control` to use an `ng-model` of `searchTerm`.
+* Update the `li` element with the `ng-repeat` to filter by `searchTerm`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+</details>
+
+<details>
+
+<summary> <code> index.html </code> </summary>
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Angular Friends</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+
+  <body ng-controller="friendCtrl">
+    <h1>The <strong>facebook</strong> Friend Machine</h1>
+
+    <div class="friends">
+      <form class="form-inline searchForm" role="form">
+        <div class="form-group">
+          <input class="form-control" placeholder="Search Anything About Your Friends" ng-model="searchTerm">
+
+          <select class="input-medium">
+            <option>Name</option>
+            <option>#Friends</option>
+            <option>City</option>
+            <option>State</option>
+            <option>Country</option>
+          </select>
+
+          <select class="input-medium">
+            <option value="-">Descending</option>
+            <option value="+">Ascending</option>
+          </select>
+        </div>
+      </form>
+
+      <ul>
+        <li class='friend'>
+          <img class="profile-pic" src='http://placebear.com/50/50.jpg'>
+          <h3>Cali Fornia</h3>
+          <div class="location">
+            Location: New Port Beach, California, United States
+          </div>
+          <div class="status">
+            Status: I hate the snow. I wish I was on the beach right now!!!
+          </div>
+          <div class="num-friends">
+            Friends: 1,367
+          </div>
+        </li>
+
+        <li class="friend" ng-repeat="friend in friends | filter:searchTerm">
+          <img class="profile-pic" ng-src="{{friend.pic_square}}" />
+          <h3>{{ friend.name }}</h3>
+          <div class="location">
+            Location: {{ friend.location.city }}, {{ friend.location.state }}, {{ friend.location.country }}
+          </div>
+          <div class="status">
+            Status: {{ friend.status }}
+          </div>
+          <div class="num-friends">
+            Friends: {{ friend.friend_count }}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- your scripts here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/friendCtrl.js"></script>
+  </body>
+</html>
+```
+
+</details>
+
+<details>
+
+<summary> <code> js/friendCtrl.js </code> </summary>
+
+```js 
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+
+  $scope.searchTerm = "";
+});
+```
+
+</details>
