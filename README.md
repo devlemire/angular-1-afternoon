@@ -374,3 +374,150 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 ```
 
 </details>
+
+## Step 4
+
+### Summary
+
+In this step, we'll refactor the current filter to be more specific. Instead of a filter that will search the entire friend object, we will narrow it down to `name` and `state`.
+
+### Instructions
+
+* Open `js/friendCtrl.js`.
+* Remove `searchTerm` from `scope`.
+* Create a new `scope` variable called `filters` that equals an object with the following properties:
+  * `name` - This should default to an empty string.
+  * `state` - This should default to an empty string.
+* Open `index.html`.
+* Delete the original `input` and replace it with the following HTML:
+  * <details>
+  
+    <summary> <code> input HTML </code> </summary>
+    
+    ```html
+    <input class="form-control" placeholder="Search Name">
+    <input class="form-control" placeholder="Search State">
+    ```
+    
+    </details>
+* Modify the new `input` elements to use the correct `ng-model`.
+  * Hint: `$scope.filters.name` and `$scope.filters.state`.
+* Modify the filter in the `ng-repeat` to specifically filter by `name` and `state`.
+  * Hint: You can filter specifically by using object-like syntax.
+    * <details>
+    
+      <summary> <code> Hint </code> </summary>
+      
+      ```js
+      filter:{ property: scopeVariable, property: { property: scopeVariable } }
+      ```
+      
+      </details>
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> index.html </code> </summary>
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Angular Friends</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+
+  <body ng-controller="friendCtrl">
+    <h1>The <strong>facebook</strong> Friend Machine</h1>
+
+    <div class="friends">
+      <form class="form-inline searchForm" role="form">
+        <div class="form-group">
+          <input class="form-control" placeholder="Search Name" ng-model="filters.name">
+          <input class="form-control" placeholder="Search State" ng-model="filters.state">
+
+          <select class="input-medium">
+            <option>Name</option>
+            <option>#Friends</option>
+            <option>City</option>
+            <option>State</option>
+            <option>Country</option>
+          </select>
+
+          <select class="input-medium">
+            <option value="-">Descending</option>
+            <option value="+">Ascending</option>
+          </select>
+        </div>
+      </form>
+
+      <ul>
+        <li class='friend'>
+          <img class="profile-pic" src='http://placebear.com/50/50.jpg'>
+          <h3>Cali Fornia</h3>
+          <div class="location">
+            Location: New Port Beach, California, United States
+          </div>
+          <div class="status">
+            Status: I hate the snow. I wish I was on the beach right now!!!
+          </div>
+          <div class="num-friends">
+            Friends: 1,367
+          </div>
+        </li>
+
+        <li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } }">
+          <img class="profile-pic" ng-src="{{friend.pic_square}}" />
+          <h3>{{ friend.name }}</h3>
+          <div class="location">
+            Location: {{ friend.location.city }}, {{ friend.location.state }}, {{ friend.location.country }}
+          </div>
+          <div class="status">
+            Status: {{ friend.status }}
+          </div>
+          <div class="num-friends">
+            Friends: {{ friend.friend_count }}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- your scripts here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/friendCtrl.js"></script>
+  </body>
+</html>
+```
+
+</details>
+
+<details>
+
+<summary> <code> js/friendCtrl.js </code> </summary>
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+
+  $scope.filters = {
+    name: '',
+    state: ''
+  };
+});
+```
+
+</details>
