@@ -130,3 +130,38 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 ```
 
 </details>
+
+## Step 2
+
+### Summary
+
+In this step, we'll add mock friend data to scope in `js/friendCtrl.js` and the display it in the HTML.
+
+### Instructions
+
+* Open `mock-data.json` and copy all the contents inside the file.
+* Open `js/friendCtrl.js`.
+* Add a `scope` variable called `friends` that equals what you copied from `mock-data.json`.
+* Open `index.html` and locate the `ul` element.
+* Underneath the only `li` element, add a new `li` element that uses `ng-repeat`.
+  * Each friend object has the following properties: 
+    * `name` - string
+    * `pic-square` - string
+    * `location` - object
+      * `city` - string
+      * `state` - string
+      * `country` - string
+      * `zip` - string
+    * `status` - string || null
+    * `friend_count` - number
+
+<details>
+
+<summary>  </summary>
+
+<br />
+
+</details>
+
+### Solution
+
