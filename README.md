@@ -154,6 +154,7 @@ In this step, we'll add mock friend data to scope in `js/friendCtrl.js` and the 
       * `zip` - string
     * `status` - string || null
     * `friend_count` - number
+  * Follow the format of hard-coded `li` element.
 
 <details>
 
@@ -165,3 +166,94 @@ In this step, we'll add mock friend data to scope in `js/friendCtrl.js` and the 
 
 ### Solution
 
+<details>
+
+<summary> <code> index.html </code> </summary>
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Angular Friends</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+
+  <body ng-controller="friendCtrl">
+    <h1>The <strong>facebook</strong> Friend Machine</h1>
+
+    <div class="friends">
+      <form class="form-inline searchForm" role="form">
+        <div class="form-group">
+          <input class="form-control" placeholder="Search Anything About Your Friends">
+
+          <select class="input-medium">
+            <option>Name</option>
+            <option>#Friends</option>
+            <option>City</option>
+            <option>State</option>
+            <option>Country</option>
+          </select>
+
+          <select class="input-medium">
+            <option value="-">Descending</option>
+            <option value="+">Ascending</option>
+          </select>
+        </div>
+      </form>
+
+      <ul>
+        <li class='friend'>
+          <img class="profile-pic" src='http://placebear.com/50/50.jpg'>
+          <h3>Cali Fornia</h3>
+          <div class="location">
+            Location: New Port Beach, California, United States
+          </div>
+          <div class="status">
+            Status: I hate the snow. I wish I was on the beach right now!!!
+          </div>
+          <div class="num-friends">
+            Friends: 1,367
+          </div>
+        </li>
+
+        <li class="friend" ng-repeat="friend in friends">
+          <img class="profile-pic" ng-src="{{friend.pic_square}}" />
+          <h3>{{ friend.name }}</h3>
+          <div class="location">
+            Location: {{ friend.location.city }}, {{ friend.location.state }}, {{ friend.location.country }}
+          </div>
+          <div class="status">
+            Status: {{ friend.status }}
+          </div>
+          <div class="num-friends">
+            Friends: {{ friend.friend_count }}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- your scripts here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/friendCtrl.js"></script>
+  </body>
+</html>
+```
+
+</details>
+
+<details>
+
+<summary> <code> js/friendCtrl.js </code> </summary>
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json 
+});
+```
+
+</details>
