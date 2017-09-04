@@ -8,6 +8,9 @@ Live example: <a href="https://devlemire.github.io/angular-1-afternoon/">Click M
 
 ## Setup
 
+* Fork and clone this repository.
+* Open the project directory in your coding IDE.
+
 ## Step 1
 
 ### Summary
