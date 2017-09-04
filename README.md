@@ -530,6 +530,15 @@ In this step, we'll add the option to sort our friends by their properties in as
 
 ### Instructions
 
+* Open `js/friendCtrl.js`.
+* Add a new `scope` property called `sorts` that equals an object with the following properties:
+  * `property` - This should default to `"name"`.
+  * `direction` - This should default to `"+"`.
+* Open `index.html`.
+* Assign the correct `ng-model` to the two `select` elements.
+* Add a `value` attribute to each `option` element in the first `select` element.
+  * This should equal the corresponding `property` on the `friend` object.
+* Add an `orderBy` to the `ng-repeat` to order by `property` and `direction`.
 
 <details>
 
