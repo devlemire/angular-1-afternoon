@@ -521,3 +521,141 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 ```
 
 </details>
+
+## Step 5
+
+### Summary
+
+In this step, we'll add the option to sort our friends by their properties in ascending and descending order.
+
+### Instructions
+
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+</details>
+
+### Solution
+
+<details>
+
+<summary> <code> index.html </code> </summary>
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Angular Friends</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+
+  <body ng-controller="friendCtrl">
+    <h1>The <strong>facebook</strong> Friend Machine</h1>
+
+    <div class="friends">
+      <form class="form-inline searchForm" role="form">
+        <div class="form-group">
+          <input class="form-control" placeholder="Search Name" ng-model="filters.name">
+          <input class="form-control" placeholder="Search State" ng-model="filters.state">
+
+          <select class="input-medium" ng-model="sorts.property">
+            <option value="name">Name</option>
+            <option value="friend_count">#Friends</option>
+            <option value="location.city">City</option>
+            <option value="location.state">State</option>
+            <option value="location.country">Country</option>
+          </select>
+
+          <select class="input-medium" ng-model="sorts.direction">
+            <option value="-">Descending</option>
+            <option value="+">Ascending</option>
+          </select>
+        </div>
+      </form>
+
+      <ul>
+        <li class='friend'>
+          <img class="profile-pic" src='http://placebear.com/50/50.jpg'>
+          <h3>Cali Fornia</h3>
+          <div class="location">
+            Location: New Port Beach, California, United States
+          </div>
+          <div class="status">
+            Status: I hate the snow. I wish I was on the beach right now!!!
+          </div>
+          <div class="num-friends">
+            Friends: 1,367
+          </div>
+        </li>
+
+        <li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } } | orderBy: sorts.direction + sorts.property">
+          <img class="profile-pic" ng-src="{{friend.pic_square}}" />
+          <h3>{{ friend.name }}</h3>
+          <div class="location">
+            Location: {{ friend.location.city }}, {{ friend.location.state }}, {{ friend.location.country }}
+          </div>
+          <div class="status">
+            Status: {{ friend.status }}
+          </div>
+          <div class="num-friends">
+            Friends: {{ friend.friend_count }}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- your scripts here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/friendCtrl.js"></script>
+  </body>
+</html>
+```
+
+</details>
+
+<details>
+
+<summary> <code> js/friendCtrl.js </code> </summary>
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+
+  $scope.filters = {
+    name: '',
+    state: ''
+  };
+
+  $scope.sorts = {
+    property: 'name',
+    direction: '+'
+  };
+});
+```
+
+</details>
+
+## Black Diamond
+
+Create the filter using `ng-options` instead.
+
+## Contributions
+
+If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
+
+## Copyright
+
+© DevMountain LLC, 2017. Unauthorized use and/or duplication of this material without express and written permission from DevMountain, LLC is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to DevMountain with appropriate and specific direction to the original content.
+
+<p align="center">
+<img src="https://devmounta.in/img/logowhiteblue.png" width="250">
+</p>
