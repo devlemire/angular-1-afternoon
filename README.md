@@ -157,7 +157,7 @@ In this step, we'll add mock friend data to scope in `js/friendCtrl.js` and the 
 
 <details>
 
-<summary>  </summary>
+<summary> Detailed Instructions </summary>
 
 <br />
 
