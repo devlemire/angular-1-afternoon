@@ -310,6 +310,10 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 
 </details>
 
+<br />
+
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/1.png" />
+
 ## Step 3
 
 ### Summary
@@ -447,6 +451,10 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 
 </details>
 
+<br />
+
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/1g.gif" />
+
 ## Step 4
 
 ### Summary
@@ -491,6 +499,47 @@ In this step, we'll refactor the current filter to be more specific. Instead of 
 <summary> Detailed Instructions </summary>
 
 <br />
+
+Let's begin by opening `js/friendCtrl.js` and removing `searchTerm` from `$scope`. Instead of just filtering through every property of a `friend` object, let's make an object that will contain specific filters. Let's call our new variable `$scope.filters` and add `name` and `state` as properties on it.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+
+  $scope.filters = {
+    name: '',
+    state: ''
+  };
+});
+```
+
+Now let's open `index.html` and apply our new `$scope` variable as a `ng-model`. Let's get rid of the `input` that's already there and replace it with two inputs.
+
+```html
+<input class="form-control" placeholder="Search Name">
+<input class="form-control" placeholder="Search State">
+```
+
+We can then apply our `ng-model` to these inputs using `dot` notation. For the `input` element with the placeholder of `Search Name` let's apply `filters.name` as its `ng-model`. And let's apply `filters.state` as the other `input` element's `ng-model`.
+
+```html
+<input class="form-control" placeholder="Search Name" ng-model="filters.name">
+<input class="form-control" placeholder="Search State" ng-model="filters.state">
+```
+
+We can then modify the `ng-repeat` filter to use our new `ng-models`. In Angular, when you want to use multiple filters we use an object-like syntax rather than `filter:scopeVariable`. So if we wanted to filter by name, we would do:
+
+```html
+<li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name }">
+```
+
+The tricky part here is adding a filter for `state` because `state` is a property on a nested object. Luckily Angular allows us to filter by nested properties as long as we provided the parent object. This would look like:
+
+```html
+<li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } }">
+```
+
+Now you can test filtering specifically by a friend's name or state.
 
 </details>
 
@@ -594,6 +643,10 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 
 </details>
 
+<br />
+
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/2g.gif" />
+
 ## Step 5
 
 ### Summary
@@ -617,6 +670,51 @@ In this step, we'll add the option to sort our friends by their properties in as
 <summary> Detailed Instructions </summary>
 
 <br />
+
+Let's being by opening `js/friendCtrl.js` and adding a new `$scope` variable called `sorts`. This will be an object to hold the `ng-model` values for sorting. We'll need two properies on this object: `property` - we'll use this to determine which property to sort by and `direction` - we'll use this to determine whether to display in ascending or decsending order.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+
+  $scope.filters = {
+    name: '',
+    state: ''
+  };
+
+  $scope.sorts = {
+    property: 'name',
+    direction: '+'
+  };
+});
+```
+
+We can then assign `property` and `direction` as `ng-models` to the the `select` elements in `index.html`
+
+```html
+<select class="input-medium" ng-model="sorts.property">
+<select class="input-medium" ng-model="sorts.direction">
+```
+
+Before our `ng-model` will work with our first `select` element, we'll need to assign a `value` attribute to each `option` element. Otherwise our `ng-model` will never get updated with a value. Since this `ng-model` is looking for a friend `property` the value of each option must be spelt exactly the same as it is for each `friend` object. You can view what the property names are on a friend object by adding `console.log( $scope.friends )` in `js/friendCtrl.js`. You should end up with:
+
+```html
+<select class="input-medium" ng-model="sorts.property">
+  <option value="name">Name</option>
+  <option value="friend_count">#Friends</option>
+  <option value="location.city">City</option>
+  <option value="location.state">State</option>
+  <option value="location.country">Country</option>
+</select>
+``` 
+
+Now that our `ng-models` are ready to be used, all that's left is to add another `|` and `orderBy` to our `ng-repeat`. `orderBy` wokrs by using `+` for ascending and `-` for decsending. That's why the second `select` element uses `+` and `-` as its option values. The `+` or `-` needs to be immediately followed by a property to order by. So for example, ascending order by name would look like: `+name`. We can make this dynamic by using our `$scope.sorts` variable. 
+
+```html
+<li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } } | orderBy: sorts.direction + sorts.property">
+``` 
+
+You can now test ordering your friends by different properties.
 
 </details>
 
@@ -724,6 +822,10 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 ```
 
 </details>
+
+<br />
+
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/3g.gif" />
 
 ## Black Diamond
 
