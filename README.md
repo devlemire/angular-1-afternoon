@@ -708,7 +708,7 @@ Before our `ng-model` will work with our first `select` element, we'll need to a
 </select>
 ``` 
 
-Now that our `ng-models` are ready to be used, all that's left is to add another `|` and `orderBy` to our `ng-repeat`. `orderBy` wokrs by using `+` for ascending and `-` for decsending. That's why the second `select` element uses `+` and `-` as its option values. The `+` or `-` needs to be immediately followed by a property to order by. So for example, ascending order by name would look like: `+name`. We can make this dynamic by using or `$scope.sorts` variable. 
+Now that our `ng-models` are ready to be used, all that's left is to add another `|` and `orderBy` to our `ng-repeat`. `orderBy` wokrs by using `+` for ascending and `-` for decsending. That's why the second `select` element uses `+` and `-` as its option values. The `+` or `-` needs to be immediately followed by a property to order by. So for example, ascending order by name would look like: `+name`. We can make this dynamic by using our `$scope.sorts` variable. 
 
 ```html
 <li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } } | orderBy: sorts.direction + sorts.property">
