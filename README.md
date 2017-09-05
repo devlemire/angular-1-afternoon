@@ -533,7 +533,7 @@ We can then modify the `ng-repeat` filter to use our new `ng-models`. In Angular
 <li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name }">
 ```
 
-The tricky part here is adding a filter for `state` because `state` is a property on a nested object. Luckily Angular allows us to filter by nested properties as long as we provided the parent object. This would like:
+The tricky part here is adding a filter for `state` because `state` is a property on a nested object. Luckily Angular allows us to filter by nested properties as long as we provided the parent object. This would look like:
 
 ```html
 <li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } }">
@@ -642,6 +642,10 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 ```
 
 </details>
+
+<br />
+
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/2g.gif" />
 
 ## Step 5
 
