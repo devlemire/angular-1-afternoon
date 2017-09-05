@@ -671,6 +671,51 @@ In this step, we'll add the option to sort our friends by their properties in as
 
 <br />
 
+Let's being by opening `js/friendCtrl.js` and adding a new `$scope` variable called `sorts`. This will be an object to hold the `ng-model` values for sorting. We'll need two properies on this object: `property` - we'll use this to determine which property to sort by and `direction` - we'll use this to determine whether to display in ascending or decsending order.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+
+  $scope.filters = {
+    name: '',
+    state: ''
+  };
+
+  $scope.sorts = {
+    property: 'name',
+    direction: '+'
+  };
+});
+```
+
+We can then assign `property` and `direction` as `ng-models` to the the `select` elements in `index.html`
+
+```html
+<select class="input-medium" ng-model="sorts.property">
+<select class="input-medium" ng-model="sorts.direction">
+```
+
+Before our `ng-model` will work with our first `select` element, we'll need to assign a `value` attribute to each `option` element. Otherwise our `ng-model` will never get updated with a value. Since this `ng-model` is looking for a friend `property` the value of each option must be spelt exactly the same as it is for each `friend` object. You can view what the property names are on a friend object by adding `console.log( $scope.friends )` in `js/friendCtrl.js`. You should end up with:
+
+```html
+<select class="input-medium" ng-model="sorts.property">
+  <option value="name">Name</option>
+  <option value="friend_count">#Friends</option>
+  <option value="location.city">City</option>
+  <option value="location.state">State</option>
+  <option value="location.country">Country</option>
+</select>
+``` 
+
+Now that our `ng-models` are ready to be used, all that's left is to add another `|` and `orderBy` to our `ng-repeat`. `orderBy` wokrs by using `+` for ascending and `-` for decsending. That's why the second `select` element uses `+` and `-` as its option values. The `+` or `-` needs to be immediately followed by a property to order by. So for example, ascending order by name would look like: `+name`. We can make this dynamic by using or `$scope.sorts` variable. 
+
+```html
+<li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } } | orderBy: sorts.direction + sorts.property">
+``` 
+
+You can now test ordering your friends by different properties.
+
 </details>
 
 ### Solution
