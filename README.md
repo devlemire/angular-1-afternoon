@@ -312,7 +312,7 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 
 <br />
 
-<img src="https://github.com/jameslemire/angular-1-afternoon/blob/solution/readme-assets/1.png" />
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/1.png" />
 
 ## Step 3
 
@@ -453,7 +453,7 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 
 <br />
 
-<img src="https://github.com/jameslemire/angular-1-afternoon/blob/solution/readme-assets/1g.gif" />
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/1g.gif" />
 
 ## Step 4
 
