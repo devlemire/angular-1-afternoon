@@ -37,7 +37,34 @@ In this step, we'll create the skeleton of our Angular application.
 
 <br />
 
+Let's begin by creating a `js` folder at the root of the project. We'll use this folder to hold all our Angular javascript files. Inside this folder, create two new files: `app.js` and `friendCtrl.js`. We'll create our Angular application in `js/app.js`. Let's open this file and create an Angular application called `myApp`.
 
+```js
+angular.module("myApp", []);
+```
+
+Take note of the empty array after `"myApp"`, this is what tells Angular we are creating a new application. When we reference `myApp` we don't include the array again. We'll see an example of this when we create our controller. Now that our Angular application is made, let's make an Angular controller called `friendCtrl` in `js/friendCtrl.js`.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+
+}
+```
+
+As you can see, we did not use `angular.module("myApp", [])` but instead `angular.module("myApp")`. Now that we have our Angular app and controller, let's link the Angular CDN, our app, and our controller to `index.html` under `<!-- your scripts here -->`.
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/friendCtrl.js"></script>
+```
+
+Now that our `index.html` has access to Angular, our app, and our controller, we can edit the HTML to use our app and controller. On the opening `html` tag let's add the `ng-app` attribute and set it equal to the name of our app ( `myApp` ). And on the opening `body` tag let's add the `ng-controller` attribute and set it equal to the name of our controller ( `friendCtrl` ). 
+
+```html
+<html ng-app="myApp">
+<body ng-controller="friendCtrl">
+```
 
 </details>
 
@@ -161,6 +188,32 @@ In this step, we'll add mock friend data to scope in `js/friendCtrl.js` and the 
 
 <br />
 
+Let's begin by opening `js/friendCtrl.js` and adding a new `$scope` variable called `friends` that equals the array inside of `mock-data.json`.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+}
+```
+
+Now that our mock data is on `$scope` we can access it in our `HTML`. Using the `ng-repeat` attribute we can create a new `li` element that will loop through `$scope.friends`. We'll want our `li` element to follow the same format as the one provided. If you're not sure what properties are on each `friend` object, you can add a `console.log` in `js/friendCtrl.js` to log the value of `$scope.friends`. You should end up with an `li` element that looks like:
+
+```html
+<li class="friend" ng-repeat="friend in friends">
+  <img class="profile-pic" ng-src="{{friend.pic_square}}" />
+  <h3>{{ friend.name }}</h3>
+  <div class="location">
+    Location: {{ friend.location.city }}, {{ friend.location.state }}, {{ friend.location.country }}
+  </div>
+  <div class="status">
+    Status: {{ friend.status }}
+  </div>
+  <div class="num-friends">
+    Friends: {{ friend.friend_count }}
+  </div>
+</li>
+```
+
 </details>
 
 ### Solution
@@ -276,6 +329,25 @@ In this step, we will add a filter to our `ng-repeat`.
 <summary> Detailed Instructions </summary>
 
 <br />
+
+Let's begin by opening `js/friendCtrl.js` and adding a new `$scope` variable called `searchTerm` that equals `""`. We'll use this variable as the `ng-model` for the `input` element in our HTML. The `ng-model` will then capture what we type in the `input` element.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json 
+
+  $scope.searchTerm = "";
+});
+``` 
+
+Open `index.html` and locate the `input` element with the class of `.form-control`. Add a `ng-model` attribute to it that equals `searchTerm`. Now that the `input` element is hooked up to `searchTerm` we can modify our `ng-repeat` attribute to include a filter based on the value of `searchTerm`. To add a filter to `ng-repeat` all you have to do is include a `|` and then `filter:scopeVariable`.
+
+```html
+<input class="form-control" placeholder="Search Anything About Your Friends" ng-model="searchTerm">
+<li class="friend" ng-repeat="friend in friends | filter:searchTerm">
+```
+
+You can now test filtering your friends using the input field.
 
 </details>
 
