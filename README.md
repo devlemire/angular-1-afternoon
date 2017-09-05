@@ -37,7 +37,7 @@ In this step, we'll create the skeleton of our Angular application.
 
 <br />
 
-Let's begin by creating a `js` file at the root of the project. We'll use this folder to hold all our Angular javascript files. Inside this folder, create two new files: `app.js` and `friendCtrl.js`. We'll create our Angular application in `js/app.js`. Let's open this file and create an Angular application called `myApp`.
+Let's begin by creating a `js` folder at the root of the project. We'll use this folder to hold all our Angular javascript files. Inside this folder, create two new files: `app.js` and `friendCtrl.js`. We'll create our Angular application in `js/app.js`. Let's open this file and create an Angular application called `myApp`.
 
 ```js
 angular.module("myApp", []);
