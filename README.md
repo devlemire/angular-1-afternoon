@@ -330,6 +330,25 @@ In this step, we will add a filter to our `ng-repeat`.
 
 <br />
 
+Let's begin by opening `js/friendCtrl.js` and adding a new `$scope` variable called `searchTerm` that equals `""`. We'll use this variable as the `ng-model` for the `input` element in our HTML. The `ng-model` will then capture what we type in the `input` element.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json 
+
+  $scope.searchTerm = "";
+});
+``` 
+
+Open `index.html` and locate the `input` element with the class of `.form-control`. Add a `ng-model` attribute to it that equals `searchTerm`. Now that the `input` element is hooked up to `searchTerm` we can modify our `ng-repeat` attribute to include a filter based on the value of `searchTerm`. To add a filter to `ng-repeat` all you have to do is include a `|` and then `filter:scopeVariable`.
+
+```html
+<input class="form-control" placeholder="Search Anything About Your Friends" ng-model="searchTerm">
+<li class="friend" ng-repeat="friend in friends | filter:searchTerm">
+```
+
+You can now test filtering your friends using the input field.
+
 </details>
 
 ### Solution
