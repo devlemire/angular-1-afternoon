@@ -188,6 +188,32 @@ In this step, we'll add mock friend data to scope in `js/friendCtrl.js` and the 
 
 <br />
 
+Let's begin by opening `js/friendCtrl.js` and adding a new `$scope` variable called `friends` that equals the array inside of `mock-data.json`.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+}
+```
+
+Now that our mock data is on `$scope` we can access it in our `HTML`. Using the `ng-repeat` attribute we can create a new `li` element that will loop through `$scope.friends`. We'll want our `li` element to follow the same format as the one provided. If you're not sure what properties are on each `friend` object, you can add a `console.log` in `js/friendCtrl.js` to log the value of `$scope.friends`. You should end up with an `li` element that looks like:
+
+```html
+<li class="friend" ng-repeat="friend in friends">
+  <img class="profile-pic" ng-src="{{friend.pic_square}}" />
+  <h3>{{ friend.name }}</h3>
+  <div class="location">
+    Location: {{ friend.location.city }}, {{ friend.location.state }}, {{ friend.location.country }}
+  </div>
+  <div class="status">
+    Status: {{ friend.status }}
+  </div>
+  <div class="num-friends">
+    Friends: {{ friend.friend_count }}
+  </div>
+</li>
+```
+
 </details>
 
 ### Solution
