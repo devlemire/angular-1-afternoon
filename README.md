@@ -778,6 +778,10 @@ angular.module("myApp").controller("friendCtrl", function( $scope ) {
 
 </details>
 
+<br />
+
+<img src="https://github.com/devlemire/angular-1-afternoon/blob/solution/readme-assets/3g.gif" />
+
 ## Black Diamond
 
 Create the filter using `ng-options` instead.
