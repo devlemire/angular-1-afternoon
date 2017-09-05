@@ -500,6 +500,47 @@ In this step, we'll refactor the current filter to be more specific. Instead of 
 
 <br />
 
+Let's begin by opening `js/friendCtrl.js` and removing `searchTerm` from `$scope`. Instead of just filtering through every property of a `friend` object, let's make an object that will contain specific filters. Let's call our new variable `$scope.filters` and add `name` and `state` as properties on it.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+  $scope.friends = // array from mock-data.json
+
+  $scope.filters = {
+    name: '',
+    state: ''
+  };
+});
+```
+
+Now let's open `index.html` and apply our new `$scope` variable as a `ng-model`. Let's get rid of the `input` that's already there and replace it with two inputs.
+
+```html
+<input class="form-control" placeholder="Search Name">
+<input class="form-control" placeholder="Search State">
+```
+
+We can then apply our `ng-model` to these inputs using `dot` notation. For the `input` element with the placeholder of `Search Name` let's apply `filters.name` as its `ng-model`. And let's apply `filters.state` as the other `input` element's `ng-model`.
+
+```html
+<input class="form-control" placeholder="Search Name" ng-model="filters.name">
+<input class="form-control" placeholder="Search State" ng-model="filters.state">
+```
+
+We can then modify the `ng-repeat` filter to use our new `ng-models`. In Angular, when you want to use multiple filters we use an object-like syntax rather than `filter:scopeVariable`. So if we wanted to filter by name, we would do:
+
+```html
+<li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name }">
+```
+
+The tricky part here is adding a filter for `state` because `state` is a property on a nested object. Luckily Angular allows us to filter by nested properties as long as we provided the parent object. This would like:
+
+```html
+<li class="friend" ng-repeat="friend in friends | filter:{ name: filters.name, location: { state: filters.state } }">
+```
+
+Now you can test filtering specifically by a friend's name or state.
+
 </details>
 
 ### Solution
