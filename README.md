@@ -37,7 +37,34 @@ In this step, we'll create the skeleton of our Angular application.
 
 <br />
 
+Let's begin by creating a `js` file at the root of the project. We'll use this folder to hold all our Angular javascript files. Inside this folder, create two new files: `app.js` and `friendCtrl.js`. We'll create our Angular application in `js/app.js`. Let's open this file and create an Angular application called `myApp`.
 
+```js
+angular.module("myApp", []);
+```
+
+Take note of the empty array after `"myApp"`, this is what tells Angular we are creating a new application. When we reference `myApp` we don't include the array again. We'll see an example of this when we create our controller. Now that our Angular application is made, let's make an Angular controller called `friendCtrl` in `js/friendCtrl.js`.
+
+```js
+angular.module("myApp").controller("friendCtrl", function( $scope ) {
+
+}
+```
+
+As you can see, we did not use `angular.module("myApp", [])` but instead `angular.module("myApp")`. Now that we have our Angular app and controller, let's link the Angular CDN, our app, and our controller to `index.html` under `<!-- your scripts here -->`.
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/friendCtrl.js"></script>
+```
+
+Now that our `index.html` has access to Angular, our app, and our controller, we can edit the HTML to use our app and controller. On the opening `html` tag let's add the `ng-app` attribute and set it equal to the name of our app ( `myApp` ). And on the opening `body` tag let's add the `ng-controller` attribute and set it equal to the name of our controller ( `friendCtrl` ). 
+
+```html
+<html ng-app="myApp">
+<body ng-controller="friendCtrl">
+```
 
 </details>
 
